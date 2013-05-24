@@ -1,0 +1,30 @@
+﻿<script language="javascript" type="text/javascript">
+    $(document).ready(function () {
+        $("#btnLogOn").click(function () {
+            //            var url = '@Url.Action("LogOn","Account")';
+            //            $.get(url, { rand: rand(9999) }, function (data) {
+            //                $("#masterContent").html(data);
+            //            });
+            var url = '@Url.Action("Default","Account")';
+            location.href = url;
+        });
+
+        $("#LogOff").click(function () {
+            alert("LogOff");
+        });
+    });
+</script>
+
+@{
+    if (Request.IsAuthenticated) {
+
+        @*@:欢迎您，<b>@Page.User.Identity.Name;</b>!*@
+        @:[ @Html.ActionLink("注销", "LogOff", "Account", new { href="#",id="btnLogOff"}) 
+        @:]
+}
+    else {
+
+        @:[ @Html.ActionLink("登录", "LogOn", "Account", new { href = "#", id = "btnLogOn" }) 
+        @:]
+}
+}

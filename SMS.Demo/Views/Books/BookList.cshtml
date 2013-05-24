@@ -1,0 +1,160 @@
+﻿@model SMS.UI.Mvc3.Demo.Helpers.PaginatedList<SMS.Entities.Book>
+@{
+    ViewBag.Title = "BookList";
+}
+<script language="javascript" type="text/javascript">
+    $(document).ready(function () {
+
+        $("#next").click(function () {
+            var url = '@Url.Action("BookList", new { pageIndex = Model.PageIndex + 1 })';
+            $.get(url, { rand: rand(9999) }, function (data) {
+                $("#content").html(data);
+            });
+        });
+        $("#pre").click(function () {
+            var url = '@Url.Action("BookList", new { pageIndex = Model.PageIndex - 1 })';
+            $.get(url, { rand: rand(9999) }, function (data) {
+                $("#content").html(data);
+            });
+        });
+
+        $("#btnAdd").click(function () {
+            var url = '@Url.Action("Add")';
+            $.get(url, { rand: rand(9999) }, function (data) {
+                $("#content").html(data);
+            });
+        });
+
+        $(".edit").click(function (e) {
+            var key = $(this).attr("key");
+            var url = '@Url.Action("Edit")';
+            $.get(url, { rand: rand(9999), bookid: key }, function (data) {
+                $("#content").html(data);
+            });
+        });
+
+        $(".detail").click(function (e) {
+            var key = $(this).attr("key");
+            var url = '@Url.Action("Detail")';
+            $.get(url, { rand: rand(9999), bookid: key }, function (data) {
+                $("#content").html(data);
+            });
+        });
+
+        $(".delete").click(function (e) {
+            var key = $(this).attr("key");
+            var url = '@Url.Action("Delete")';
+            $.get(url, { rand: rand(9999), bookid: key }, function (data) {
+                $("#content").html(data);
+            });
+        });
+    });
+</script>
+<div class="block">
+<h2>
+    书籍列表</h2>
+@{
+    if (Model.Count == 0)
+    {<div>
+        没有要查询的数据</div>
+    }
+    else
+    {
+    <div style="margin:5px 0">
+        共 @Model.TotalPages.ToString() 
+            页，当前第
+         @{var currPage = (Model.PageIndex + 1).ToString();}
+            @currPage
+        页</div>
+    <table>
+        <thead>
+            <tr>
+                <th>
+                    书名
+                </th>
+                <th>
+                    出版日期
+                </th>
+                <th>
+                    作者
+                </th>
+                <th>
+                    价格
+                </th>
+                <th>
+                    销量
+                </th>
+                <th>
+                    国家
+                </th>
+                <th>
+                    省
+                </th>
+                <th>
+                    市
+                </th>
+                <th>
+                    操作
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @item.Name
+                    </td>
+                    <td>
+                        @String.Format("{0:d}", item.PublishDate)
+                    </td>
+                    <td>
+                        @item.Author
+                    </td>
+                    <td>
+                        @String.Format("{0:c2}", item.Price)
+                    </td>
+                    <td>
+                        @item.Sales
+                    </td>
+                    <td>
+                        @item.MarketArea.Nation
+                    </td>
+                    <td>
+                        @item.MarketArea.Province
+                    </td>
+                    <td>
+                        @item.MarketArea.City
+                    </td>
+                    <td>
+                        @Html.ActionLink("编辑", "BookEdit", new { bookid = item.BookId }, new { @class = "edit", key = item.BookId, href = "#" })
+                        |
+                        @Html.ActionLink("详细", "BookDetail", new { bookid = item.BookId }, new { @class = "detail", key = item.BookId, href = "#" })
+                        |
+                        @Html.ActionLink("删除", "Delete", new { bookid = item.BookId }, new { @class = "delete", key = item.BookId, href = "#" })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    }
+}
+@{ if (Model.Count > 0)
+   {
+    <div class="actions">
+        @if (Model.HasPreviousPage)
+        {
+            <a href="#" id="pre" class="right">上一页</a>
+        }
+        @if (Model.HasNextPage)
+        {
+            <a href="#" id="next" class="right">下一页</a>
+        }
+    </div>
+   }
+}
+
+<p>
+    <input type="button" id="btnAdd" value="添加书籍" />
+</p>
+</div>

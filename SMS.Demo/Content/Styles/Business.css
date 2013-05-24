@@ -1,0 +1,55 @@
+
+/* business layout
+----------------------------------------------------------*/
+
+#left-menu
+{
+	border: solid 1px #5C87B2;
+	float: left;
+	margin-right: 20px;
+	width: 150px;
+	padding: 10px;
+	text-align: center;
+	background-color:#E8EEF4;
+}
+#left-menu a:link, #left-menu a:visited
+{
+	font-size: 20px;
+	cursor: pointer;
+	text-decoration: none;
+	color: #034AF3;
+	font-weight: bold;
+	font-family: Î¢ÈíÑÅºÚ !important;
+}
+#left-menu a:hover, #left-menu a:active
+{
+	font-size: 20px;
+	text-decoration: underline;
+	color: red;
+	font-weight: bold;
+	font-size: @Î¢ÈíÑÅºÚ;
+}
+#left-menu ul
+{
+	margin-left: 0px;
+}
+#left-menu li
+{
+	margin-bottom: 10px;
+	margin-left: -40px;
+	list-style: none;
+}
+#content
+{
+	width: 850px;
+	float: right;
+	border: solid 1px #5C87B2;
+	padding: 10px;
+	vertical-align: middle;
+}
+
+#content table
+{
+	margin-left: auto;
+	margin-right: auto;
+}

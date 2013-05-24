@@ -1,0 +1,75 @@
+﻿@model SMS.Entities.User
+@{
+    ViewBag.Title = "用户注册";
+}
+<script language="javascript" type="text/javascript">
+    $(document).ready(function () {
+        //         $("#btnSubmit").click(function () {
+        //             $("#regUserForm").ajaxSubmit(function (data) {
+        //                 $("#masterContent").html(data);
+        //             });
+        //         });
+
+        $("#back").click(function () {
+            var url = '@Url.Action("LogOn")';
+            $.get(url, { rand: rand(9999) }, function (data) {
+                $("#main").html(data);
+            });
+        });
+    });
+</script>
+<div class="block">
+    <h2>
+        注册新帐户</h2>
+    <p>
+        使用以下表单创建新帐户。
+    </p>
+    @{ using (Html.BeginForm())
+       { 
+        @Html.ValidationSummary(true, "帐户创建不成功。请更正错误并重试。") 
+        <div>
+            <table>
+                <tr>
+                    <th>@Html.LabelFor(m => m.UserName)
+                    </th>
+                    <td>
+                        @Html.TextBoxFor(m => m.UserName)
+                        @Html.ValidationMessageFor(m => m.UserName)
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        @Html.LabelFor(m => m.Email)
+                    </th>
+                    <td>
+                        @Html.TextBoxFor(m => m.Email)
+                        @Html.ValidationMessageFor(m => m.Email)
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        @Html.LabelFor(m => m.Password)
+                    </th>
+                    <td>
+                        @Html.PasswordFor(m => m.Password)
+                        @Html.ValidationMessageFor(m => m.Password)
+                    </td>
+                </tr>
+                @*<tr>
+                <th>
+                    确认密码
+                </th>
+                <td>
+                    @Html.TextBox("ConfirmPwd")
+                    @Html.ValidationMessageFor(m => m.Password)
+                </td>
+            </tr>*@
+            </table>
+            <p>
+                <a href="#" id="back">返回登录</a>
+                <input type="submit" value="注册" id="btnSubmit" />
+                @*<input type="button" value="注册" id="btnSubmit" />*@
+            </p>
+        </div>
+       } 
+    }</div>

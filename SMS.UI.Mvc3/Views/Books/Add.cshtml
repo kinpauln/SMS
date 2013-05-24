@@ -1,0 +1,112 @@
+﻿
+<script language="javascript" type="text/javascript">
+    $(document).ready(function () {
+        //$("#PublishDate").datepicker();
+        $("#PublishDate").datepicker({
+            changeMonth: true,
+            changeYear: true,
+            showButtonPanel: true,
+            currentText: '今天',
+            dateFormat: 'yy-mm-dd',
+            closeText:'关闭',
+            monthNamesShort: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'],
+            prevText: '上月',
+            nextText: '下月',
+            dayNamesMin: ['日', '一', '二', '三', '四', '五', '六'],
+            dayNames: ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'],
+            yearRange:"1900:2011",
+            onSelect: function (dateText, inst) {
+            }
+        });
+
+        $("#btnAdd").click(function () {
+            $("#addingForm").ajaxSubmit(function (data) {
+                $("#content").html(data);
+            });
+        });
+
+        $("#abtnBackToList").click(function () {
+            var url = '@Url.Action("BookList")';
+            $.get(url, { rand: rand(9999) }, function (data) {
+                $("#content").html(data);
+            });
+        }); 
+    });
+</script>
+<div class="block">
+@using (Html.BeginForm("AddOneBook", "Books", FormMethod.Post, new { id = "addingForm" }))
+{
+    @Html.ValidationSummary(true)
+    <table>
+        <tr>
+            <th>书名
+            </th>
+            <td>
+                @Html.TextBox("Name")
+            </td>
+        </tr>
+        <tr>
+            <th>
+                出版日期
+            </th>
+            <td>
+                @Html.TextBox("PublishDate")
+            </td>
+        </tr>
+        <tr>
+            <th>
+                作者
+            </th>
+            <td>
+                @Html.TextBox("Author")
+            </td>
+        </tr>
+        <tr>
+            <th>
+                价格
+            </th>
+            <td>
+                @Html.TextBox("Price")
+            </td>
+        </tr>
+        <tr>
+            <th>
+                销量
+            </th>
+            <td>
+                @Html.TextBox("Sales")
+            </td>
+        </tr>
+        <tr>
+            <th>
+                国家
+            </th>
+            <td>
+                @Html.TextBox("MarketArea.Nation")
+            </td>
+        </tr>
+        <tr>
+            <th>
+                省
+            </th>
+            <td>
+                @Html.TextBox("MarketArea.Province")
+            </td>
+        </tr>
+        <tr>
+            <th>
+                城市
+            </th>
+            <td>
+                @Html.TextBox("MarketArea.City")
+            </td>
+        </tr>
+    </table>
+    <p>
+        <input type="button" value="添加" id="btnAdd" />
+    </p>
+}
+<div>
+    @Html.ActionLink("返回书籍列表", "BookList", null, new { href="#",id="abtnBackToList"})
+</div>
+</div>

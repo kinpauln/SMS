@@ -1,0 +1,13 @@
+﻿@{
+    ViewBag.Title = "Default";
+    Layout = "~/Views/Shared/_LogOn.cshtml";
+}
+<script language="javascript" type="text/javascript">
+    $(document).ready(function () {
+        var url = '@Url.Action("LogOn")';
+        $.get(url, { rand: rand(9999)}, function (data) {
+            $("#main").html(data);
+        });
+    });
+</script>
+

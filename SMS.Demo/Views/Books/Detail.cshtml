@@ -1,0 +1,70 @@
+﻿@model SMS.Entities.Book
+@{
+    ViewBag.Title = "BookDetail";
+}
+<script language="javascript" type="text/javascript">
+    $(document).ready(function () {
+        $("#abtnBackToList").click(function () {
+            var url = '@Url.Action("BookList")';
+            $.get(url, { rand: rand(9999) }, function (data) {
+                $("#content").html(data);
+            });
+        });
+
+        $("#abtnEdit").click(function () {
+            var url = '@Url.Action("Edit")';
+            var bookid = $(this).attr("bookid");
+            $.get(url, { rand: rand(9999), bookid: bookid }, function (data) {
+                $("#content").html(data);
+            });
+        });
+
+    });
+</script>
+<div class="block">
+    <h2>
+        书籍详细信息</h2>
+    <table>
+        <tr>
+            <th>
+                书名
+            </th>
+            <td>
+            <label>@Model.Name</label>
+            </td>
+        </tr>
+        <tr>
+            <th>
+                出版日期
+            </th>
+            <td><label>@String.Format("{0:d}", Model.PublishDate)</label>
+            </td>
+        </tr>
+        <tr>
+            <th>
+                作者
+            </th>
+            <td><label>@Model.Author</label>
+            </td>
+        </tr>
+        <tr>
+            <th>
+                价格
+            </th>
+            <td><label>@String.Format("{0:F}", Model.Price)</label>
+            </td>
+        </tr>
+        <tr>
+            <th>
+                销量
+            </th>
+            <td><label>@Model.Sales</label>
+            </td>
+        </tr>
+    </table>
+    <p>
+        @Html.ActionLink("编辑", "Edit", null, new { href = "#", id = "abtnEdit", bookid = Model.BookId })
+        |
+        @Html.ActionLink("返回书籍列表", "BookList", null, new { href = "#", id = "abtnBackToList" })
+    </p>
+</div>

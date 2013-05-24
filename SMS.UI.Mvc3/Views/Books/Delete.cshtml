@@ -1,0 +1,81 @@
+﻿@model SMS.Entities.Book
+@{
+    ViewBag.Title = "删除书籍";
+}
+<script language="javascript" type="text/javascript">
+    $(document).ready(function () {
+        $("#abtnBackToList").click(function () {
+            var url = '@Url.Action("BookList")';
+            $.get(url, { rand: rand(9999) }, function (data) {
+                $("#content").html(data);
+            });
+        });
+
+        $("#btnDel").click(function () {
+//            $("#delForm").ajaxSubmit(function (data) {
+//                $("#content").html(data);
+            //            });
+
+            var url = '@Url.Action("DeleteExec")';
+            $.get(url, { rand: rand(9999),bookid :$("#bookid").val()  }, function (data) {
+                $("#content").html(data);
+            });
+        });
+    });
+</script>
+<div class="block">
+    <h2>
+        删除书籍</h2>
+    <h3>
+        确定要删除该书籍么?</h3>
+    <table>
+        <tr>
+            <th>
+                书名
+            </th>
+            <td>
+                <label>@Model.Name</label>
+            </td>
+        </tr>
+        <tr>
+            <th>
+                出版日期
+            </th>
+            <td>
+                <label>@String.Format("{0:g}", Model.PublishDate)</label>
+            </td>
+        </tr>
+        <tr>
+            <th>
+                作者
+            </th>
+            <td>
+                <label>@Model.Author</label>
+            </td>
+        </tr>
+        <tr>
+            <th>
+                价格
+            </th>
+            <td>
+                <label>@String.Format("{0:F}", Model.Price)</label>
+            </td>
+        </tr>
+        <tr>
+            <th>
+                销量
+            </th>
+            <td>
+                <label>@Model.Sales</label>
+            </td>
+        </tr>
+    </table>
+    @using (Html.BeginForm("Delete", "Books", FormMethod.Post, new { id = "delForm" }))
+    {
+        <p>
+            @Html.Hidden("bookid", Model.BookId)
+            <input type="button" value="删除" id="btnDel" bookid='@Model.BookId' />
+            @Html.ActionLink("返回书籍列表", "BookList", null, new { href = "#", id = "abtnBackToList" })
+        </p>
+    }
+</div>

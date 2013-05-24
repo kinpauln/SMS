@@ -1,0 +1,14 @@
+﻿@{
+    ViewBag.Title = "Default";
+    Layout = "~/Views/Shared/_Business.cshtml";
+}
+<script language="javascript" type="text/javascript">
+    $(document).ready(function () {
+        var url = '@Url.Action("BookList", "Books")';
+        $.get(url, { rand: rand(9999) }, function (data) {
+            $("#content").html(data);
+        });
+    });
+</script>
+
+

@@ -1,0 +1,133 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="db_SMS" Class="SMSDataClassesDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=WORKSTATIONC\sqlexpress;Initial Catalog=db_SMS;User ID=sa" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="db_SMSConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.tb_BorrowGoods" Member="tb_BorrowGoods">
+    <Type Name="tb_BorrowGood">
+      <Column Name="BGID" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="GoodsName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="StoreName" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="GoodsSpec" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="GoodsNum" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="BGDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="HandlePeople" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="BGPeople" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="BGUnit" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="BGRemark" Type="System.String" DbType="VarChar(1000)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tb_User" Member="tb_Users">
+    <Type Name="tb_User">
+      <Column Name="UserID" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="UserName" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="UserPwd" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="UserRight" Type="System.String" DbType="Char(10)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tb_Check" Member="tb_Checks">
+    <Type Name="tb_Check">
+      <Column Name="CheckID" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="GoodsID" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="StoreName" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="GoodsName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="GoodsUnit" Type="System.String" DbType="Char(8)" CanBeNull="true" />
+      <Column Name="CheckNum" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="PALNum" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="CheckDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="CheckPeople" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="CheckRemark" Type="System.String" DbType="VarChar(1000)" CanBeNull="true" />
+      <Column Name="Editer" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="EditDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tb_GoodsInfo" Member="tb_GoodsInfos">
+    <Type Name="tb_GoodsInfo">
+      <Column Name="GoodsID" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="GoodsName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="StoreName" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="GoodsSpec" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="GoodsUnit" Type="System.String" DbType="Char(8)" CanBeNull="true" />
+      <Column Name="GoodsNum" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="GoodsInPrice" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="GoodsOutPrice" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="GoodsLeast" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="GoodsMost" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="Editer" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="EditDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tb_InStore" Member="tb_InStores">
+    <Type Name="tb_InStore">
+      <Column Name="ISID" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="GoodsID" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="GoodsName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="PrName" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="StoreName" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="GoodsSpec" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="GoodsUnit" Type="System.String" DbType="Char(8)" CanBeNull="true" />
+      <Column Name="GoodsNum" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="GoodsPrice" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="GoodsAPrice" Type="System.Decimal" DbType="Money" IsDbGenerated="true" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="ISDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="HandlePeople" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="ISRemark" Type="System.String" DbType="VarChar(1000)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tb_OutStore" Member="tb_OutStores">
+    <Type Name="tb_OutStore">
+      <Column Name="OSID" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="StoreName" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="GoodsName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="GoodsSpec" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="GoodsUnit" Type="System.String" DbType="Char(8)" CanBeNull="true" />
+      <Column Name="GoodsNum" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="GoodsPrice" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="GoodsAPrice" Type="System.Decimal" DbType="Money" IsDbGenerated="true" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="OSDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="PGProvider" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="PGPeople" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="HandlePeople" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="OSRemark" Type="System.String" DbType="VarChar(1000)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tb_Provider" Member="tb_Providers">
+    <Type Name="tb_Provider">
+      <Column Name="PrID" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="PrName" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="PrPeople" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="PrPhone" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="PrFax" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="PrRemark" Type="System.String" DbType="VarChar(1000)" CanBeNull="true" />
+      <Column Name="Editer" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="EditDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tb_ReturnGoods" Member="tb_ReturnGoods">
+    <Type Name="tb_ReturnGood">
+      <Column Name="RGID" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="BGID" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="StoreName" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="GoodsName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="GoodsSpec" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="RGNum" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="NRGNum" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="RGDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="HandlePeople" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="RGPeople" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="RGRemark" Type="System.String" DbType="VarChar(1000)" CanBeNull="true" />
+      <Column Name="Editer" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="EditDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tb_Storage" Member="tb_Storages">
+    <Type Name="tb_Storage">
+      <Column Name="StoreID" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="StoreName" Type="System.String" DbType="VarChar(100) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="StorePeople" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="StorePhone" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="StoreUnit" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="StoreDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="StoreRemark" Type="System.String" DbType="VarChar(1000)" CanBeNull="true" />
+      <Column Name="Editer" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="EditDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+    </Type>
+  </Table>
+</Database>
