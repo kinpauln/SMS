@@ -10,21 +10,18 @@ using System.Web.Security;
 using SMS.UI.Mvc3.Models;
 using SMS.Domain;
 using SMS.Entities;
+using System.Configuration;
 
 namespace SMS.UI.Mvc3.Controllers
 {
     public class AccountController : Controller
     {
-        private UserDBContext db = new UserDBContext();
+        private string _dbConnString = ConfigurationManager.ConnectionStrings["db_SMSConnectionString"].ConnectionString;
 
         public ActionResult Default()
         {
             return View();
         }
-
-        // **************************************
-        // URL: /Account/LogOn
-        // **************************************
 
         public ActionResult LogOn()
         {
@@ -32,16 +29,25 @@ namespace SMS.UI.Mvc3.Controllers
         }
 
         [HttpPost]
-        public ActionResult LogOn(LogOnModel model)
+        public ActionResult LogOn(SMS.UI.Mvc3.Models.tb_User model)
         {
+            //bool sucess = false;
+            string message = string.Empty;
+
             if (ModelState.IsValid)
             {
-                int count = db.Users.Select(u=>u.UserName.Equals(model.UserName) && u.Password.Equals(model.Password)).Count();
-
-                if (count>0)
+                int? count = 0;
+                using (SMSDataClassesDataContext dc = new SMSDataClassesDataContext(_dbConnString))
+                {
+                    count = dc.tb_Users.Where(u => u.UserName.Equals(model.UserName)
+                        && u.UserPwd.Equals(model.UserPwd))
+                        .Count();
+                }
+                if (count > 0)
                 {
                     return RedirectToAction("Default", "Books");
                 }
+
                 else
                 {
                     // 如果我们进行到这一步时某个地方出错，则重新显示表单
@@ -50,6 +56,12 @@ namespace SMS.UI.Mvc3.Controllers
             }
             // 如果我们进行到这一步时某个地方出错，则重新显示表单
             return View(model);
+
+            //return Json(new
+            //{
+            //    Succeed = sucess,
+            //    ErrorInfo = message
+            //}, JsonRequestBehavior.AllowGet);
         }
 
         // **************************************
@@ -64,12 +76,12 @@ namespace SMS.UI.Mvc3.Controllers
         [HttpPost] 
         public ActionResult Register(SMS.Entities.User model)
         {
-            if (ModelState.IsValid)
-            {
-                db.Users.Add(model);
-                db.SaveChanges();
-                return RedirectToAction("Default","Books");
-            }
+            //if (ModelState.IsValid)
+            //{
+            //    db.Users.Add(model);
+            //    db.SaveChanges();
+            //    return RedirectToAction("Default","Books");
+            //}
 
             // 如果我们进行到这一步时某个地方出错，则重新显示表单
             return View(model);

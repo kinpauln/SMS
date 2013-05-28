@@ -57,7 +57,7 @@ namespace SMS.UI.Mvc3.Models
     #endregion
 		
 		public SMSDataClassesDataContext() :
-        base(global::System.Configuration.ConfigurationManager.ConnectionStrings["SMSDbConnString"].ConnectionString, mappingSource)
+        base(global::System.Configuration.ConfigurationManager.ConnectionStrings["db_SMSConnectionString"].ConnectionString, mappingSource)
 		{
 			OnCreated();
 		}
