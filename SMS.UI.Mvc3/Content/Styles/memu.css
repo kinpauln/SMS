@@ -72,6 +72,9 @@
     border-color: #fafafa;
     color: #56789A;
 }
+.memu li.memu-root:hover > a {
+	color:#fff;
+}
 .memu li:hover > ul {
     left: -20px;
     opacity: 1;
