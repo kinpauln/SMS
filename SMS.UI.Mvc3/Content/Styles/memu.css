@@ -52,8 +52,12 @@
 	border-bottom: 1px solid transparent !important;
 	background: transparent !important;
 	font-size:15px;
-	color:#fff;
+	color:#525D4C;
 }
+.memu li.memu-root
+{
+    /*text-align:center;*/
+    }
 
 .memu li {
     float: left;
@@ -72,8 +76,11 @@
     border-color: #fafafa;
     color: #56789A;
 }
+.memu li.memu-root:hover {
+	background-color:#fff;
+}
 .memu li.memu-root:hover > a {
-	color:#fff;
+	/*background-color:#fff;*/
 }
 .memu li:hover > ul {
     left: -20px;
