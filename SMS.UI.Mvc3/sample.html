@@ -1,53 +1,48 @@
-﻿<!DOCTYPE html>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <title>@ViewBag.Title</title>
-    <link href="@Url.Content("~/Content/Styles/Site.css")" rel="stylesheet" type="text/css" />
-    <link href="@Url.Content("~/Content/css/jqueryui/ui-lightness/jquery-ui-1.8.16.custom.css")" rel="stylesheet" type="text/css" />
-    <link href="@Url.Content("~/Content/Styles/memu.css")" rel="stylesheet" type="text/css" />
-    <link href="@Url.Content("~/Content/Styles/icon.css")" rel="stylesheet" type="text/css" />
-    <script src="@Url.Content("~/Scripts/jquery-1.4.4.min.js")" type="text/javascript"></script>
-    <script src="@Url.Content("~/Scripts/jquery-ui-1.8.16.custom.min.js")" type="text/javascript"></script>
-    <script src="@Url.Content("~/Scripts/jquery.form.js")" type="text/javascript"></script>
-    <script src="@Url.Content("~/Scripts/Site.js")" type="text/javascript"></script>
-    <script src="@Url.Content("~/Scripts/memu.js")" type="text/javascript"></script>
-    
-    <script language="javascript" type="text/javascript">
-        $(document).ready(function () {
-
-            // Dialog			
-            $('#query-dialog').dialog({
-                autoOpen: false,
-                width: 400,
-
-                buttons: {
-                    "确定": function () {
-                        alert("你点击了Dialog的确定按钮");
-                    },
-                    "取消": function () {
-                        $(this).dialog("close");
-                    }
-                },
-                open: function () {
-                    $("input[name=FmSn]").val("");
-                    $("input[name=FmName]").val("");
-                    $("input[name=OrgCode]").val("");
-                    $("input[name=OrgName]").val("");
-                }
-            });
-            $("#btnQuery").click(function () {
-                $('#query-dialog').dialog('open');
-                return false;
-            });
-
-            $("#btnMain").click(function () {
-                var url = '@Url.Action("BookList")';
-                $.get(url, { rand: rand(9999) }, function (data) {
-                    $("#content").html(data);
-                });
-            });
-
-
+    <title>Memu Demo</title>
+    <link href="Content/css/memu.css" rel="stylesheet" type="text/css" />
+    <link href="Content/css/icon.css" rel="stylesheet" type="text/css" />
+    <script src="Scripts/jquery-1.4.4.min.js" type="text/javascript"></script>
+    <script src="Scripts/memu.js" type="text/javascript"></script>
+    <style type="text/css" media="screen">
+        body
+        {
+            background: #56789a;
+            color: #fff;
+            font-family: segoe ui, verdana, sans-serif;
+            font-size: 1.6em;
+        }
+        
+        pre
+        {
+            font-size: 0.6em;
+        }
+        
+        .menu-container
+        {
+            margin: 0 auto;
+            padding: 0;
+            height: 506px;
+            width: 721px;
+            background: #fff;
+            border: 1px solid #222;
+        }
+        
+        .container
+        {
+            border-top: 6px solid #fff;
+            margin: 0 auto;
+            padding: 0;
+            padding-top: 10px;
+            width: 721px;
+            text-align: left;
+            font-size: 1.0em;
+        }
+    </style>
+    <script type="text/javascript">
+        $(function () {
             $('.js-enabled').memu({
                 icon: {
                     inset: true, 	// create an inset where there is no icon
@@ -57,30 +52,19 @@
                     }
                 },
                 width: 150, 		// the width of the (drop down) items
-                rootWidth: 130, 		// the width of the (root) items
+                rootWidth: 120, 		// the width of the (root) items
                 height: 25			// the height of the items
             });
         });
     </script>
 </head>
-<body>
-    <div class="page">
-        <div id="header">
-            <div id="title">
-                <h1>
-                    SMS之MVC3</h1>
-            </div>
-            <div id="logindisplay">
-                @Html.Partial("LogOnUserControl")
-            </div>
-            <div id="menucontainer">
-                @*<ul id="menu">
-                    <li><a href="#" id="btnMain" target="_self">主页</a></li>
-                    <li><a href="#" id="btnQuery">检索</a> </li>
-                </ul>*@
-                
+<body style="margin: 0">
+    <center>
+        Example 1 <small>javascript enabled</small></center>
+    <br />
+    <div class="menu-container">
         <ul class="memu js-enabled">
-            <li class="memu-root"><a href="#">货物管理[M]</a>
+            <li class="memu-root"><a href="#">File1</a>
                 <ul>
                     <li class="has-children"><a href="sample_2.html">
                         <div class="memu-icon sprite-page_white">
@@ -135,7 +119,7 @@
                         Exit</a></li>
                 </ul>
             </li>
-            <li class="memu-root"><a href="#">基本档案[I]</a>
+            <li class="memu-root"><a href="#">Edit</a>
                 <ul>
                     <li><a href="#">Undo</a></li>
                     <li><a href="#">Cut</a></li>
@@ -172,64 +156,20 @@
                     </li>
                 </ul>
             </li>
-            <li class="memu-root"><a href="#">查询统计[S]</a>
+            <li class="memu-root"><a href="#">Format</a>
                 <ul>
                     <li><a href="#">Word Wrap</a></li>
                     <li><a href="#">Font...</a></li>
                 </ul>
             </li>
-            <li class="memu-root"><a href="#">系统维护[W]</a>
-                <ul>
-                    <li><a href="#">Status Bar</a></li>
-                </ul>
-            </li>
-            <li class="memu-root"><a href="#">帮助[H]</a>
+            <li class="memu-root"><a href="#">View</a>
                 <ul>
                     <li><a href="#">Status Bar</a></li>
                 </ul>
             </li>
         </ul>
-        <div class="clear"></div>
-            </div>
-        </div>
-        <div id="main">
-            @RenderBody()
-        </div>
-        <div id="footer">
-            @@CopyRight2011
-        </div>
     </div>
-    <div id="query-dialog" title="检索条件" class="dlg">
-        @using (Html.BeginForm("CardQuery", "SpecialCard", FormMethod.Post))
-        {
-            @Html.ValidationSummary(true)
-            <table class="tb-query">
-                <tr>
-                    <th>
-                        书名
-                    </th>
-                    <td>@Html.TextBox("Name")
-                    </td>
-                </tr>
-                <tr>
-                    <th>
-                        作者
-                    </th>
-                    <td>@Html.TextBox("Author")
-                    </td>
-                </tr>
-                <tr>
-                    <th>
-                        销售地区（省）
-                    </th>
-                    <td>@Html.TextBox("Province")
-                    </td>
-                </tr>
-            </table>
-        }
-    </div>
-    <div id="loading">
-        <span>请稍候……</span>
-    </div>
+    <br>
+    <br>
 </body>
 </html>
