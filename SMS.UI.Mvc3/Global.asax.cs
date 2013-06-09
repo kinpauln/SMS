@@ -11,6 +11,7 @@ using SMS.UI.ControllerFactory;
 using SMS.UI.Mvc3.Helpers;
 using SMS.Entities;
 using SMS.UI.Mvc3.Controllers;
+using SMS.UI.Mvc3.Filters;
 
 namespace SMS.UI.Mvc3
 {
@@ -22,6 +23,9 @@ namespace SMS.UI.Mvc3
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)
         {
             filters.Add(new HandleErrorAttribute());
+
+            //注册全局过滤器
+            filters.Add(new LoggedInUserAttribute() { });
         }
 
         public static void RegisterRoutes(RouteCollection routes)
