@@ -12,7 +12,7 @@ using System.Web;
 
 namespace SMS.UI.Mvc3.Controllers
 {
-    public class ErrorController : Controller
+    public class ErrorController : BaseController
     {
         public virtual ActionResult Index()
         {

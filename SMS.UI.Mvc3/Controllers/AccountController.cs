@@ -14,7 +14,7 @@ using System.Configuration;
 
 namespace SMS.UI.Mvc3.Controllers
 {
-    public class AccountController : Controller
+    public class AccountController : BaseController
     {
         private string _dbConnString = ConfigurationManager.ConnectionStrings["db_SMSConnectionString"].ConnectionString;
 

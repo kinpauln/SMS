@@ -11,7 +11,7 @@ using System.Data;
 
 namespace SMS.UI.Mvc3.Controllers
 {
-    public class BooksController : Controller
+    public class BooksController : BaseController
     {
         //BookDBContext db = new BookDBContext();
         //BookRepository repository = new BookRepository();
