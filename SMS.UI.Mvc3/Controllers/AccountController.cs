@@ -11,6 +11,7 @@ using SMS.UI.Mvc3.Models;
 using SMS.Domain;
 using SMS.Entities;
 using System.Configuration;
+using SMS.UI.Mvc3.Helpers;
 
 namespace SMS.UI.Mvc3.Controllers
 {
@@ -20,12 +21,42 @@ namespace SMS.UI.Mvc3.Controllers
 
         public ActionResult Default()
         {
-            return View();
+            bool isLoginUser = SMS.UI.Mvc3.Helpers.SMSHelper.IsLoginUser();
+            if (isLoginUser) {
+                return RedirectToAction("Default", "Books");
+            }
+            else
+            {
+                return View();
+            }
         }
 
         public ActionResult LogOn()
         {
             return View();
+        }
+
+        [HttpGet]
+        public JsonResult LogOff()
+        {
+            try
+            {
+                FormsAuthentication.SignOut();
+
+                return Json(new {
+                    Succeeded = true,
+                    ErrorMessage = string.Empty
+                }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                LogHelper.WriteLog(ex.Message, ex);
+                return Json(new
+                {
+                    Succeeded = false,
+                    ErrorMessage = ex.Message
+                },JsonRequestBehavior.AllowGet);
+            }
         }
 
         [HttpPost]
@@ -36,16 +67,11 @@ namespace SMS.UI.Mvc3.Controllers
 
             if (ModelState.IsValid)
             {
-                tb_User user = null;
-                using (SMSDataClassesDataContext dc = new SMSDataClassesDataContext(_dbConnString))
-                {
-                    user = dc.tb_Users.Where(u => u.UserName.Equals(model.UserName)
-                        && u.UserPwd.Equals(model.UserPwd))
-                        .FirstOrDefault();
-                }
+                tb_User user = SMS.UI.Mvc3.Models.SMSModel.GetOneUserEntity(model.UserName);
+
                 if (user!=null)
                 {
-                    FormsAuthentication.SetAuthCookie(user.UserID.ToString(), false);
+                    FormsAuthentication.SetAuthCookie(user.UserName.ToString(), false);
                     return RedirectToAction("Default", "Books");
                 }
                 else

@@ -7,7 +7,7 @@ using System.Diagnostics;
 
 namespace SMS.UI.Mvc3.Filters
 {
-    public class LoggedInUserAttribute : ActionFilterAttribute
+    public class CheckLoginAttribute : ActionFilterAttribute
     {
         /*注意：  其中 filterContext对象是 从页面传过来的。
                         获取页面controller值的方法是  filterContext.RouteData.GetRequiredString("controller")
@@ -19,6 +19,11 @@ namespace SMS.UI.Mvc3.Filters
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
             base.OnActionExecuting(filterContext);
+            bool isLoginUser = SMS.UI.Mvc3.Helpers.SMSHelper.IsLoginUser();
+            if (!isLoginUser) {
+                //filterContext.Result(("http://" + filterContext.HttpContext.Request.Url.Host + ":" + filterContext.HttpContext.Request.Url.Port.ToString() + "/" + retUrl);
+                filterContext.Result = new RedirectResult("/");
+            }
             //if (filterContext.HttpContext.Request.QueryString["k"] == "go")
             //{
             //    string retUrl = filterContext.RouteData.GetRequiredString("controller") + "/" + filterContext.RouteData.GetRequiredString("action");

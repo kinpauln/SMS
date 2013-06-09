@@ -9,21 +9,31 @@
             location.href = url;
         });
 
-        $("#LogOff").click(function () {
-            alert("LogOff");
+        $("#btnLogOff").click(function () {
+            var url = '@Url.Action("LogOff","Account")';
+            $.get(url, { rand: rand(9999) }, function (data) {
+                if (data.Succeeded) {
+                    location.href = "/";
+                } else {
+                    alert(data.ErrorMessage);
+                }
+            });
         });
     });
 </script>
 @{
-    //bool isLoginUser = SMS.UI.Mvc3.Helpers.SMSHelper.IsLoginUser();
-    SMS.UI.Mvc3.Models.tb_User user = SMS.UI.Mvc3.Models.SMSModel.GetOneUserEntity(System.Web.HttpContext.Current.User.Identity.Name);
+    bool isLoginUser = SMS.UI.Mvc3.Helpers.SMSHelper.IsLoginUser();
+    SMS.UI.Mvc3.Models.tb_User user = null;
+    if(isLoginUser){
+        user = SMS.UI.Mvc3.Models.SMSModel.GetOneUserEntity(System.Web.HttpContext.Current.User.Identity.Name);
+    }
     }
 
 @{
     if (user!=null)
     {
 
-        @:欢迎您，<b>@user.UserName;</b>!
+        @:欢迎您，<b>@user.UserName</b>
         @:[ @Html.ActionLink("注销", "LogOff", "Account", new { href="#",id="btnLogOff"}) 
         @:]
 }

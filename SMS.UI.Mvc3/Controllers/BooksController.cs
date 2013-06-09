@@ -8,9 +8,11 @@ using SMS.Domain.Repositories;
 using SMS.Entities;
 using SMS.UI.Mvc3.Helpers;
 using System.Data;
+using SMS.UI.Mvc3.Filters;
 
 namespace SMS.UI.Mvc3.Controllers
 {
+    [CheckLogin]
     public class BooksController : BaseController
     {
         //BookDBContext db = new BookDBContext();

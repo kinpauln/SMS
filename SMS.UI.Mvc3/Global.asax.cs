@@ -12,6 +12,7 @@ using SMS.UI.Mvc3.Helpers;
 using SMS.Entities;
 using SMS.UI.Mvc3.Controllers;
 using SMS.UI.Mvc3.Filters;
+using StackExchange.Profiling;
 
 namespace SMS.UI.Mvc3
 {
@@ -25,7 +26,7 @@ namespace SMS.UI.Mvc3
             filters.Add(new HandleErrorAttribute());
 
             //注册全局过滤器
-            filters.Add(new LoggedInUserAttribute() { });
+            //filters.Add(new CheckLoginAttribute() { });
         }
 
         public static void RegisterRoutes(RouteCollection routes)
@@ -53,6 +54,7 @@ namespace SMS.UI.Mvc3
         protected void Application_Start()
         {
             LogHelper.SetConfig();
+            MiniProfilerEF.Initialize(); 
 
             //Database.SetInitializer<SMSContext>(new SMSIntializer());
             //Database.SetInitializer(new DropCreateDatabaseAlways<UserDBContext>()); 

@@ -12,5 +12,7 @@
 		IHttpHandler httpHandler = new MvcHttpHandler();
 		httpHandler.ProcessRequest(HttpContext.Current);
 		HttpContext.Current.RewritePath(originalPath, false);
+
+        //FormsAuthentication.SignOut();
 	}
 </script>
