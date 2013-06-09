@@ -31,12 +31,22 @@ namespace SMS.UI.Mvc3
         public static void RegisterRoutes(RouteCollection routes)
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
+            routes.IgnoreRoute("{*favicon}", new { favicon = @"(.*/)?favicon.ico(/.*)?" });
 
             routes.Register();
+
+            //routes.MapRoute(
+            //    "Books", // 路由名称
+            //    "Books/{action}", // 带有参数的 URL
+            //    new { controller = "Books", action = "Default", id = UrlParameter.Optional }, // 参数默认值
+            //    new { controller = @"[^/.]*" } // Parameter constraints (we're constraining the controller parameter such that periods are invalid characters, so the routing system won't bother looking for the favicon.ico controller.)
+            //);
+
             //routes.MapRoute(
             //    "Default", // 路由名称
-            //    "{controller}/{action}/{id}", // 带有参数的 URL
-            //    new { controller = "Books", action = "Add", id = UrlParameter.Optional } // 参数默认值
+            //    "{controller}/{action}", // 带有参数的 URL
+            //    new { controller = "Account", action = "Default", id = UrlParameter.Optional }, // 参数默认值
+            //    new { controller = @"[^/.]*" }  // Parameter constraints (we're constraining the controller parameter such that periods are invalid characters, so the routing system won't bother looking for the favicon.ico controller.)
             //);
         }
 
@@ -47,7 +57,7 @@ namespace SMS.UI.Mvc3
             //Database.SetInitializer<SMSContext>(new SMSIntializer());
             //Database.SetInitializer(new DropCreateDatabaseAlways<UserDBContext>()); 
             //Database.SetInitializer<SMSContext>(new DropCreateDatabaseIfModelChanges<SMSContext>());
-                        
+
             RegisterGlobalFilters(GlobalFilters.Filters);
             RegisterRoutes(RouteTable.Routes);
 
@@ -121,6 +131,6 @@ namespace SMS.UI.Mvc3
             IController errorController = new ErrorController();
             errorController.Execute(new RequestContext(
                  new HttpContextWrapper(Context), routeData));
-        } 
+        }
     }
 }

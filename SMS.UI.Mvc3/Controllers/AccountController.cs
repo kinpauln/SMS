@@ -36,18 +36,18 @@ namespace SMS.UI.Mvc3.Controllers
 
             if (ModelState.IsValid)
             {
-                int? count = 0;
+                tb_User user = null;
                 using (SMSDataClassesDataContext dc = new SMSDataClassesDataContext(_dbConnString))
                 {
-                    count = dc.tb_Users.Where(u => u.UserName.Equals(model.UserName)
+                    user = dc.tb_Users.Where(u => u.UserName.Equals(model.UserName)
                         && u.UserPwd.Equals(model.UserPwd))
-                        .Count();
+                        .FirstOrDefault();
                 }
-                if (count > 0)
+                if (user!=null)
                 {
+                    FormsAuthentication.SetAuthCookie(user.UserID.ToString(), false);
                     return RedirectToAction("Default", "Books");
                 }
-
                 else
                 {
                     // 如果我们进行到这一步时某个地方出错，则重新显示表单

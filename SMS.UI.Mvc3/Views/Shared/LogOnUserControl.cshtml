@@ -14,11 +14,16 @@
         });
     });
 </script>
+@{
+    //bool isLoginUser = SMS.UI.Mvc3.Helpers.SMSHelper.IsLoginUser();
+    SMS.UI.Mvc3.Models.tb_User user = SMS.UI.Mvc3.Models.SMSModel.GetOneUserEntity(System.Web.HttpContext.Current.User.Identity.Name);
+    }
 
 @{
-    if (Request.IsAuthenticated) {
+    if (user!=null)
+    {
 
-        @*@:欢迎您，<b>@Page.User.Identity.Name;</b>!*@
+        @:欢迎您，<b>@user.UserName;</b>!
         @:[ @Html.ActionLink("注销", "LogOff", "Account", new { href="#",id="btnLogOff"}) 
         @:]
 }

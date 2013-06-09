@@ -81,6 +81,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\SMSHelper.cs" />
     <Compile Include="Helpers\LogHelper.cs" />
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\SMSDataClasses.designer.cs">
@@ -88,6 +89,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>SMSDataClasses.dbml</DependentUpon>
     </Compile>
+    <Compile Include="Models\SMSModel.cs" />
     <Compile Include="Models\SMSIntializer.cs" />
     <Compile Include="Helpers\PaginatedList.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -119,8 +121,10 @@
     <Content Include="Content\Images\shadow_bg.png" />
     <Content Include="Content\Images\ui-bg_glass_100_fdf5ce_1x400.png" />
     <Content Include="Content\Images\ui-bg_glass_85_dfeffc_1x400.png" />
+    <Content Include="Content\Styles\icon.css" />
     <Content Include="Content\Styles\Logon.css" />
     <Content Include="Content\Styles\Business.css" />
+    <Content Include="Content\Styles\memu.css" />
     <Content Include="Default.aspx" />
     <Content Include="Global.asax" />
     <Content Include="Content\Styles\Site.css" />
